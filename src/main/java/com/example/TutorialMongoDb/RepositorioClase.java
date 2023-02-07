@@ -13,5 +13,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface RepositorioClase extends MongoRepository<Clase, String>{
     Clase findOneByProfesor(Persona p);
     
+    Clase findOneByProfesorId(String id);
+    
     
 }

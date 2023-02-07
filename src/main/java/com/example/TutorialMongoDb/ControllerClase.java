@@ -6,13 +6,16 @@ package com.example.TutorialMongoDb;
 
 import java.util.List;
 import java.util.Optional;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -91,11 +94,55 @@ public class ControllerClase {
             else return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         else return new ResponseEntity(HttpStatus.NO_CONTENT);
-        
-        
-        
-    
     }
+    
+    @DeleteMapping("/deleteClaseByIdProfesor/{id}")
+    public ResponseEntity<Clase> removeClaseByNombreProfesor(@PathVariable("id") String id){
+        Clase c = repositorio.findOneByProfesorId(id);
+        if(c!=null){
+            Persona p = c.getProfesor();
+        
+            repositorio.delete(c);
+            repositorioPersona.delete(p);
+            return ResponseEntity.ok().body(c);
+            
+        } else{
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+    
+    @PutMapping("/editarProfesorClase/{id}")
+    public ResponseEntity<Persona> editarProfesorClase(@PathVariable("id") String id, @RequestBody Persona p){
+        Optional<Clase> claseBuscada = repositorio.findById(id);
+        
+        if(claseBuscada.isPresent()){
+            Clase cEncontrada = claseBuscada.get();
+            Persona personaClase = cEncontrada.getProfesor();
+            
+            if(p.getNombre()!=null){
+                personaClase.setNombre(p.getNombre());
+            }
+            if(p.getApellido()!=null){
+                personaClase.setApellido(p.getApellido());
+            }
+            if(p.getCurso()!=null){
+                personaClase.setCurso(p.getCurso());
+            }
+            if(p.getNacionalidad()!=null){
+                personaClase.setNacionalidad(p.getNacionalidad());
+            }
+            repositorioPersona.save(personaClase);
+            return ResponseEntity.ok().body(personaClase);
+            
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+       
+    }
+    
+    
+    
     
     
     

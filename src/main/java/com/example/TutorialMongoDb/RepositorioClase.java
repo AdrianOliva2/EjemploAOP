@@ -5,11 +5,13 @@
 package com.example.TutorialMongoDb;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author capea
  */
+@Repository
 public interface RepositorioClase extends MongoRepository<Clase, String>{
     Clase findOneByProfesor(Persona p);
     

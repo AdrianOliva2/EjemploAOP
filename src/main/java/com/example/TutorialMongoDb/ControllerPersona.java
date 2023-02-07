@@ -65,7 +65,7 @@ public class ControllerPersona {
     }
     //Buscar por apellido
     @GetMapping("/getPersonasApellido/{apellido}")
-    public ResponseEntity<List<Persona>> obtenerPersonasApellido(@PathVariable("apellido") String apellido){
+    public ResponseEntity<List<Persona>> obtenerPersonasApellido(@PathVariable("apellido") String apellido){ //Parametros en la ruta ej: http://localhost:8080/personas/getPersonasApellido/Apellido1
         try{
         List<Persona> listaPersonas = personaRepositorio.findByApellido(apellido);
         
@@ -83,7 +83,7 @@ public class ControllerPersona {
     
     //Buscar por nombre usando parametros en la url
     @GetMapping("/getPersonaNombre")
-    public ResponseEntity<List<Persona>> obtenerPersonasNombre(@RequestParam(name = "nombre", required = true) String nombre){
+    public ResponseEntity<List<Persona>> obtenerPersonasNombre(@RequestParam(name = "nombre", required = true) String nombre){ //Parametros de url ej: http://localhost:8080/personas/getPersonaNombre?nombre=Nombre
         List<Persona> personas = null;
         personas = personaRepositorio.findByNombreLike(nombre);
         

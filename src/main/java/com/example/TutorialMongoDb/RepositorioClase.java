@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  * @author capea
  */
 public interface RepositorioClase extends MongoRepository<Clase, String>{
-    Clase findByProfesorNombre(String nombre);
+    Clase findOneByProfesor(Persona p);
     
     
 }

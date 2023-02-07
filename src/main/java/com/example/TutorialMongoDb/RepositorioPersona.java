@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
  */
 
 //Debemos incorporar un repositorio por cada collection que tengamos para trabajar con ella. Esos métodos no pueden tener cualquier nombre sino que deben tener una notación especial
+//Los repositorios nos ofrecen métodos para realizar operaciones CRUD en la base de datos
 @Repository
 public interface RepositorioPersona extends MongoRepository<Persona, String>{
     List<Persona> findByApellido(String apellido);

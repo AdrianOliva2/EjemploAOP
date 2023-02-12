@@ -11,12 +11,18 @@
 	<groupId>com.example.TutorialMongoDb</groupId>
 	<artifactId>TutorialMongoDb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TutorialMongoDb</name>
+	<name>EjemploAOP</name>
 	<description>Tutorial de creación de API con MongoDB+Spring</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
+                <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
